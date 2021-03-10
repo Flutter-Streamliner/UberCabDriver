@@ -1,0 +1,83 @@
+{
+  "project_info": {
+    "project_number": "993836699208",
+    "firebase_url": "https://uberclone-983d8-default-rtdb.firebaseio.com",
+    "project_id": "uberclone-983d8",
+    "storage_bucket": "uberclone-983d8.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:993836699208:android:9b7b1441a9978f16fb527d",
+        "android_client_info": {
+          "package_name": "com.example.uber_clone_app"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "993836699208-m0aeesma9vjiv6c9upbeqcvegtb81ivt.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAXw7GcRdCoQE7S1yEF1aplSAiR2mIJPGs"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "993836699208-m0aeesma9vjiv6c9upbeqcvegtb81ivt.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "993836699208-d4d9rsni3ef5s7jk8hp26rk2oe1dh9ij.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.thisisstreamliner.uberCloneApp"
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:993836699208:android:a248e3ef62972a0dfb527d",
+        "android_client_info": {
+          "package_name": "com.streamliner.cab_driver"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "993836699208-m0aeesma9vjiv6c9upbeqcvegtb81ivt.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAXw7GcRdCoQE7S1yEF1aplSAiR2mIJPGs"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "993836699208-m0aeesma9vjiv6c9upbeqcvegtb81ivt.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "993836699208-d4d9rsni3ef5s7jk8hp26rk2oe1dh9ij.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.thisisstreamliner.uberCloneApp"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

@@ -12,7 +12,7 @@ Future<void> main() async {
       options: Platform.isIOS || Platform.isMacOS
           ? FirebaseOptions(
               appId: '1:993836699208:ios:21daffc4cf81311cfb527d',
-              apiKey: 'AIzaSyAXw7GcRdCoQE7S1yEF1aplSAiR2mIJPGs',
+              apiKey: 'AIzaSyAiXrI_kv7Iy7S9bY4TZvqyM1smWBNHL4w',
               projectId: 'uberclone-983d8',
               messagingSenderId: '993836699208',
               databaseURL:

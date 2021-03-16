@@ -1,4 +1,6 @@
 import 'package:cab_driver/brand_colors.dart';
+import 'package:cab_driver/global_variables.dart';
+import 'package:cab_driver/screens/vehicle_info_page.dart';
 import 'package:firebase_auth/firebase_auth.dart' as auth;
 import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/material.dart';
@@ -26,7 +28,7 @@ class _RegistrationPageState extends State<RegistrationPage> {
 
   final passwordController = TextEditingController();
 
-  void showSnackBar(title) {
+  void _showSnackBar(BuildContext context, String title) {
     final SnackBar snackBar = SnackBar(
       content: Text(
         title,
@@ -34,8 +36,7 @@ class _RegistrationPageState extends State<RegistrationPage> {
         style: TextStyle(fontSize: 15),
       ),
     );
-    Scaffold.of(context).showSnackBar(snackBar);
-    //ScaffoldMessenger.of(context).showSnackBar(snackBar);
+    ScaffoldMessenger.of(context).showSnackBar(snackBar);
   }
 
   void registerUser() async {
@@ -51,22 +52,27 @@ class _RegistrationPageState extends State<RegistrationPage> {
       Navigator.pop(context);
       print('error while registering $error');
       //PlatformException exception = error;
-      showSnackBar(error);
+      _showSnackBar(context, error?.toString() ?? 'unexpected error');
     });
     if (credential.user != null) {
       print('Registration successful');
-      DatabaseReference newUserRef = FirebaseDatabase.instance
-          .reference()
-          .child('drivers/${credential.user.uid}');
-      // Prepare data to be saved on user table
-      Map userMap = {
-        'fullName': fullNameController.text,
-        'email': emailController.text,
-        'phone': phoneController.text,
-      };
-      newUserRef.set(userMap);
-      // Take the user to main page
-      Navigator.pushNamedAndRemoveUntil(context, MainPage.id, (route) => false);
+      try {
+        DatabaseReference newUserRef = FirebaseDatabase.instance
+            .reference()
+            .child('drivers/${credential.user.uid}');
+        // Prepare data to be saved on user table
+        Map userMap = {
+          'fullName': fullNameController.text,
+          'email': emailController.text,
+          'phone': phoneController.text,
+        };
+        newUserRef.set(userMap);
+        currentFirebaseUser = credential.user;
+        // Take the user to main page
+        Navigator.of(context).pushNamed(VehicleInfoPage.id);
+      } catch (e) {
+        print('error is ====================== $e');
+      }
     }
   }
 
@@ -188,30 +194,32 @@ class _RegistrationPageState extends State<RegistrationPage> {
                         onPressed: () async {
                           // check network availability
                           if (!await Connection.checkConnection()) {
-                            showSnackBar('No internet');
+                            _showSnackBar(context, 'No internet');
                             return;
                           }
 
                           if (fullNameController.text.trim().length < 3) {
-                            showSnackBar('Please provide a valid full name');
+                            _showSnackBar(
+                                context, 'Please provide a valid full name');
                             return;
                           }
                           if (!emailController.text.contains('@')) {
-                            showSnackBar(
+                            _showSnackBar(context,
                                 'Please provide a correct email address');
                             return;
                           }
                           if (emailController.text.trim().length < 5) {
-                            showSnackBar(
+                            _showSnackBar(context,
                                 'Please provide a valid email address');
                             return;
                           }
                           if (phoneController.text.trim().length < 10) {
-                            showSnackBar('Please provide a valid phone number');
+                            _showSnackBar(
+                                context, 'Please provide a valid phone number');
                             return;
                           }
                           if (passwordController.text.trim().length < 8) {
-                            showSnackBar(
+                            _showSnackBar(context,
                                 'Password must be at least 8 characters');
                             return;
                           }

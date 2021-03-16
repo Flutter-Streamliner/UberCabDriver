@@ -2,6 +2,7 @@ import 'dart:io';
 
 import 'package:cab_driver/screens/main_page.dart';
 import 'package:cab_driver/screens/registration_page.dart';
+import 'package:cab_driver/screens/vehicle_info_page.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 
@@ -47,6 +48,7 @@ class MyApp extends StatelessWidget {
       routes: {
         MainPage.id: (ctx) => MainPage(),
         RegistrationPage.id: (ctx) => RegistrationPage(),
+        VehicleInfoPage.id: (ctx) => VehicleInfoPage(),
       },
     );
   }

@@ -1,5 +1,6 @@
 import 'dart:io';
 
+import 'package:cab_driver/screens/login_page.dart';
 import 'package:cab_driver/screens/main_page.dart';
 import 'package:cab_driver/screens/registration_page.dart';
 import 'package:cab_driver/screens/vehicle_info_page.dart';
@@ -41,14 +42,13 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'Flutter Demo',
-      theme: ThemeData(
-        primarySwatch: Colors.blue,
-      ),
-      initialRoute: RegistrationPage.id,
+      theme: ThemeData(primarySwatch: Colors.blue, fontFamily: 'Brand-Regular'),
+      initialRoute: LoginPage.id,
       routes: {
         MainPage.id: (ctx) => MainPage(),
         RegistrationPage.id: (ctx) => RegistrationPage(),
         VehicleInfoPage.id: (ctx) => VehicleInfoPage(),
+        LoginPage.id: (ctx) => LoginPage(),
       },
     );
   }

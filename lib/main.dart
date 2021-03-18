@@ -1,10 +1,12 @@
 import 'dart:io';
 
+import 'package:cab_driver/global_variables.dart';
 import 'package:cab_driver/screens/error_page.dart';
 import 'package:cab_driver/screens/login_page.dart';
 import 'package:cab_driver/screens/main_page.dart';
 import 'package:cab_driver/screens/registration_page.dart';
 import 'package:cab_driver/screens/vehicle_info_page.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 
@@ -34,6 +36,8 @@ Future<void> main() async {
   } catch (e) {
     print('try app catch $e');
   }
+
+  currentFirebaseUser = FirebaseAuth.instance.currentUser;
   runApp(MyApp());
 }
 
@@ -44,7 +48,7 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: 'Flutter Demo',
       theme: ThemeData(primarySwatch: Colors.blue, fontFamily: 'Brand-Regular'),
-      initialRoute: LoginPage.id,
+      initialRoute: currentFirebaseUser == null ? LoginPage.id : MainPage.id,
       routes: {
         MainPage.id: (ctx) => MainPage(),
         RegistrationPage.id: (ctx) => RegistrationPage(),

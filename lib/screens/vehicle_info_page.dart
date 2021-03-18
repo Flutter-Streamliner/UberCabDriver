@@ -4,13 +4,21 @@ import 'package:cab_driver/widgets/confirm_button.dart';
 import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/material.dart';
 
-class VehicleInfoPage extends StatelessWidget {
+class VehicleInfoPage extends StatefulWidget {
   static const String id = 'vehicle_info';
+
+  @override
+  _VehicleInfoPageState createState() => _VehicleInfoPageState();
+}
+
+class _VehicleInfoPageState extends State<VehicleInfoPage> {
   final TextEditingController _modelController = TextEditingController();
+
   final TextEditingController _colorController = TextEditingController();
+
   final TextEditingController _numberController = TextEditingController();
 
-  void _showSnackBar(BuildContext context, String title) {
+  void _showSnackBar(String title) {
     final SnackBar snackBar = SnackBar(
         content: Text(
       title,
@@ -20,7 +28,7 @@ class VehicleInfoPage extends StatelessWidget {
     ScaffoldMessenger.of(context).showSnackBar(snackBar);
   }
 
-  void _updateProfile(BuildContext context) {
+  void _updateProfile() {
     String id = currentFirebaseUser.uid;
     DatabaseReference driverRef = FirebaseDatabase.instance
         .reference()
@@ -39,93 +47,85 @@ class VehicleInfoPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       body: SafeArea(
-        child: SingleChildScrollView(
+        child: Padding(
+          padding: const EdgeInsets.all(16.0),
           child: Column(
             children: [
-              SizedBox(
-                height: 20,
-              ),
               Image.asset(
                 'images/logo.png',
                 height: 110,
                 width: 110,
               ),
-              Padding(
-                padding: const EdgeInsets.fromLTRB(30, 20, 30, 30),
-                child: Column(
-                  children: [
-                    SizedBox(height: 10),
-                    Text('Enter vehicle details',
-                        style:
-                            TextStyle(fontFamily: 'Brand-Bold', fontSize: 22)),
-                    SizedBox(
-                      height: 25,
-                    ),
-                    TextField(
-                      controller: _modelController,
-                      keyboardType: TextInputType.text,
-                      decoration: InputDecoration(
-                          labelText: 'Car model',
-                          hintStyle:
-                              TextStyle(color: Colors.grey, fontSize: 10.0)),
-                      style: TextStyle(fontSize: 14.0),
-                    ),
-                    SizedBox(
-                      height: 10,
-                    ),
-                    TextField(
-                      controller: _colorController,
-                      keyboardType: TextInputType.emailAddress,
-                      decoration: InputDecoration(
-                          labelText: 'Car color',
-                          hintStyle:
-                              TextStyle(color: Colors.grey, fontSize: 10.0)),
-                      style: TextStyle(fontSize: 14.0),
-                    ),
-                    SizedBox(
-                      height: 10,
-                    ),
-                    TextField(
-                      controller: _numberController,
-                      maxLength: 11,
-                      keyboardType: TextInputType.phone,
-                      decoration: InputDecoration(
-                          counterText: '',
-                          labelText: 'Vehicle number',
-                          hintStyle:
-                              TextStyle(color: Colors.grey, fontSize: 10.0)),
-                      style: TextStyle(fontSize: 14.0),
-                    ),
-                    SizedBox(
-                      height: 40,
-                    ),
-                    ConfirmButton(
-                        title: 'PROCEED',
-                        onPressed: () {
-                          if (_modelController.text.length < 3) {
-                            _showSnackBar(
-                                context, 'Please provide a valid car model');
-                            return;
-                          }
-                          if (_colorController.text.length < 3) {
-                            _showSnackBar(
-                                context, 'Please provide a valid car color');
-                            return;
-                          }
-                          if (_numberController.text.length < 3) {
-                            _showSnackBar(context,
-                                'Please provide a valid vehicle number');
-                            return;
-                          }
-                          _updateProfile(context);
-                        }),
-                  ],
-                ),
-              )
+              SizedBox(height: 10),
+              Text('Enter vehicle details',
+                  style: TextStyle(fontFamily: 'Brand-Bold', fontSize: 22)),
+              SizedBox(
+                height: 25,
+              ),
+              TextField(
+                controller: _modelController,
+                keyboardType: TextInputType.text,
+                decoration: InputDecoration(
+                    labelText: 'Car model',
+                    hintStyle: TextStyle(color: Colors.grey, fontSize: 10.0)),
+                style: TextStyle(fontSize: 14.0),
+              ),
+              SizedBox(
+                height: 10,
+              ),
+              TextField(
+                controller: _colorController,
+                keyboardType: TextInputType.emailAddress,
+                decoration: InputDecoration(
+                    labelText: 'Car color',
+                    hintStyle: TextStyle(color: Colors.grey, fontSize: 10.0)),
+                style: TextStyle(fontSize: 14.0),
+              ),
+              SizedBox(
+                height: 10,
+              ),
+              TextField(
+                controller: _numberController,
+                maxLength: 11,
+                keyboardType: TextInputType.phone,
+                decoration: InputDecoration(
+                    counterText: '',
+                    labelText: 'Vehicle number',
+                    hintStyle: TextStyle(color: Colors.grey, fontSize: 10.0)),
+                style: TextStyle(fontSize: 14.0),
+              ),
+              SizedBox(
+                height: 40,
+              ),
+              ConfirmButton(
+                  title: 'PROCEED',
+                  onPressed: () {
+                    if (_modelController.text.length < 3) {
+                      _showSnackBar('Please provide a valid car model');
+                      return;
+                    }
+                    if (_colorController.text.length < 3) {
+                      _showSnackBar('Please provide a valid car color');
+                      return;
+                    }
+                    if (_numberController.text.length < 3) {
+                      _showSnackBar('Please provide a valid vehicle number');
+                      return;
+                    }
+                    _updateProfile();
+                  }),
             ],
           ),
         ),
       ),
     );
+  }
+
+  @override
+  void dispose() {
+    _modelController.dispose();
+    _colorController.dispose();
+    _numberController.dispose();
+    super.dispose();
   }
 }

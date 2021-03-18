@@ -1,5 +1,6 @@
 import 'dart:io';
 
+import 'package:cab_driver/screens/error_page.dart';
 import 'package:cab_driver/screens/login_page.dart';
 import 'package:cab_driver/screens/main_page.dart';
 import 'package:cab_driver/screens/registration_page.dart';
@@ -49,6 +50,7 @@ class MyApp extends StatelessWidget {
         RegistrationPage.id: (ctx) => RegistrationPage(),
         VehicleInfoPage.id: (ctx) => VehicleInfoPage(),
         LoginPage.id: (ctx) => LoginPage(),
+        ErrorPage.id: (ctx) => ErrorPage(),
       },
     );
   }

@@ -3,6 +3,10 @@
    <application
         android:label="cab_driver"
         android:icon="@mipmap/ic_launcher">
+
+        <meta-data android:name="com.google.android.geo.API_KEY"
+               android:value="AIzaSyAXw7GcRdCoQE7S1yEF1aplSAiR2mIJPGs"/>
+               
         <activity
             android:name=".MainActivity"
             android:launchMode="singleTop"
